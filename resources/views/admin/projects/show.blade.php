@@ -49,6 +49,28 @@
         @endif
         {{-- type --}}
 
+        {{-- technologies --}}
+        <strong>Tecnologie:</strong>
+        @if (count($project->technologies)>0)
+        <ol>
+            @foreach ($project->technologies as $technology)
+                <li>
+                     <strong>{{$technology->name}}</strong>
+                     <ul>
+                        <li>
+                            {{$technology->description}}
+                        </li>
+                     </ul>
+                </li>
+            @endforeach
+        </ol>
+        @else
+        <span>nessuna tecnologia</span>
+        @endif
+            <p>
+            </p>
+        {{-- /technologies --}}
+
         <p>
             <strong>slug :</strong>
             {{ $project->slug }}
