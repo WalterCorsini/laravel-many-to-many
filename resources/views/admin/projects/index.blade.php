@@ -62,6 +62,7 @@
                     <tr>
                         <th scope="col">Title</th>
                         <th scope="col">Type</th>
+                        <th scope="col">Technologies</th>
                         <th scope="col">Description</th>
                         <th scope="col">Button</th>
                     </tr>
@@ -74,9 +75,19 @@
                             <td>
                                 <span>{{ $curElem->title }}</span>
                             </td>
+
+                            {{-- type --}}
                             <td>
                                 <span class="badge" style="background:{{$curElem->type?->color ? $curElem->type->color : 'black'}}">{{($curElem->type?->name) ? $curElem->type->name : 'NULL'}}</span>
                             </td>
+                            {{-- /type --}}
+
+                            {{-- technologies --}}
+                            <td>
+                                    {{count($curElem->technologies)}}
+                            </td>
+                            {{-- /technologies --}}
+
                             <td>
                                 <span>{{ $curElem->description }}</span>
                             </td>
