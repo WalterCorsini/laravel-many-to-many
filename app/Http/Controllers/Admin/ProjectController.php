@@ -8,6 +8,7 @@ use App\Models\Project;
 use Illuminate\Support\Str;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Technology;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Type;
 
@@ -63,7 +64,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $typeList = Type::All();
-        return view('admin.projects.edit', compact('project','typeList'));
+        $technologyList = Technology::All();
+        return view('admin.projects.edit', compact('project','typeList','technologyList'));
     }
 
     /**
@@ -73,7 +75,8 @@ class ProjectController extends Controller
     {
 
         $data = $request->validated();
-        // dd($data);
+        // $data = $request->all();
+        // dd(isset($data['alpha']));
         if (isset($data['cover_image'])) {
             if ($project->cover_image) {
                 Storage::delete($project->cover_image);
