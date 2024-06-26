@@ -43,32 +43,61 @@
 
         {{-- type --}}
         @if (isset($project->type->name))
-        <p>
-            <strong>Tipologia:</strong> {{ $project->type->name }}
-        </p>
+            <p>
+                <strong>Tipologia:</strong> {{ $project->type->name }}
+            </p>
         @endif
         {{-- type --}}
 
         {{-- technologies --}}
         <strong>Tecnologie:</strong>
-        @if (count($project->technologies)>0)
-        <ol>
-            @foreach ($project->technologies as $technology)
-                <li>
-                     <strong>{{$technology->name}}</strong>
-                     <ul>
-                        <li>
-                            {{$technology->description}}
-                        </li>
-                     </ul>
-                </li>
-            @endforeach
-        </ol>
+
+        {{-- show technology id count > 0 --}}
+        @if (count($project->technologies) > 0)
+            <ol>
+                @foreach ($project->technologies as $technology)
+                    <li>
+                        <strong>{{ $technology->name }}</strong>
+                        <ul>
+                            <li>
+                                {{ $technology->description }}
+                            </li>
+
+                            {{-- show common technology if exists --}}
+                            @if (isset($technology->projects))
+                                <li>
+
+                                    {{-- show count common project have the same technology --}}
+                                    <strong>
+                                        tecnologia in comune anche con questi progetti {{ count($technology->projects) }} :
+                                    </strong>
+                                    {{-- /show count common project have the same technology --}}
+
+                                    <ul>
+
+                                        <li>
+
+                                            {{-- show common project without project->id  --}}
+                                            @foreach ($technology->projects as $commonProject)
+                                                @if ($commonProject->id != $project->id)
+                                                    <span>{{ $commonProject->title }} ,</span>
+                                                @endif
+                                            @endforeach
+                                            {{-- /show common project without project->id  --}}
+
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
+                            {{-- /show common technology if exists --}}
+
+                        </ul>
+                    </li>
+                @endforeach
+            </ol>
         @else
-        <span>nessuna tecnologia</span>
+            <span>nessuna tecnologia</span>
         @endif
-            <p>
-            </p>
         {{-- /technologies --}}
 
         <p>
