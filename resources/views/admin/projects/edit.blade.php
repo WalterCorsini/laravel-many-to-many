@@ -59,10 +59,22 @@
         <select class="mt-2 mb-3" name="type_id" id="type_id">
             <option value="">Seleziona</option>
             @foreach ($typeList as $key => $curType)
-                <option @selected($project->type_id === $key + 1) value="{{ $key + 1 }}">{{ $curType->name }}</option>
+                <option @selected($project->type_id === $curType->id) value="{{ $curType->id }}">{{ $curType->name }}</option>
             @endforeach
         </select>
         {{-- /type --}}
+
+
+        {{-- technologies --}}
+        <p>Tecnologie:</p>
+        <div class="d-flex gap-3">
+            @foreach ($technologyList as $curTechnology)
+                <label for="technology-{{ $curTechnology->id }}">{{ $curTechnology->name }}</label>
+                <input type="checkbox" id="technology-{{ $curTechnology->id }}" name="technologies[]"
+                    value="{{ $curTechnology->id }}">
+            @endforeach
+        </div>
+        {{-- technologies --}}
 
         {{-- file --}}
         <label for="cover_image"> Immagine</label>

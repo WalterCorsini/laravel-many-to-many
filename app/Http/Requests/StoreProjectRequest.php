@@ -26,6 +26,7 @@ class StoreProjectRequest extends FormRequest
             'title'             => ['required', 'min:10', Rule::unique('projects')->ignore($this->project)],
             'description'       => ['nullable', 'min:20'],
             'type_id'           => ['nullable', 'exists:types,id'],
+            'technologies'      => ['nullable', 'exists:technologies,id'],
             'cover_image'       => ['nullable', 'image', 'mimes: jpeg,jpg', 'max:2048'],
         ];
     }
@@ -38,6 +39,7 @@ class StoreProjectRequest extends FormRequest
             'unique'            => 'non si possono avere due titoli uguali',
             'description.min'   => 'Descrizione: devi inserire un minimo di 20 caratteri',
             'type_id'           => 'l\'id non esiste',
+            'technologies'      => 'il valore inserito della tecnologia non corrisponde o non esiste',
             'cover_image.image' => 'deve essere una foto',
             'cover_image.mimes' => 'formato consentito jpg o jpeg',
             'cover_image.max'   => 'dimensione massima 2 mb',

@@ -87,7 +87,6 @@
                                 {{ $curElem->technologies_count }}
                             </td>
                             {{-- /technologies --}}
-
                             <td>
                                 <span>{{ $curElem->description }}</span>
                             </td>

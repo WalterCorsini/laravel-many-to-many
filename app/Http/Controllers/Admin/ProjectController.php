@@ -55,7 +55,8 @@ class ProjectController extends Controller
             // dd($request->all());
             $newItem->technologies()->attach($request->technologies);
         }
-        return redirect()->route("admin.projects.index");
+        // dd($newItem->slug);
+        return redirect()->route("admin.projects.show", ['project'=> $newItem->slug]);
     }
 
     /**
@@ -72,7 +73,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $typeList = Type::All();
-        return view('admin.projects.edit', compact('project','typeList'));
+        $technologyList = Technology::All();
+        return view('admin.projects.edit', compact('project','typeList','technologyList'));
     }
 
     /**
@@ -97,6 +99,7 @@ class ProjectController extends Controller
 
         $data['slug'] = Str::slug($data['title']);
         $project->update($data);
+        $project->technologies()->sync($request->technologies);
         return view('admin.projects.show', compact('project'));
     }
 
