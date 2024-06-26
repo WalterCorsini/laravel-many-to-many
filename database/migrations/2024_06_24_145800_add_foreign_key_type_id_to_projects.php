@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             $table->unsignedBigInteger('type_id')->nullable()->after('description');
-            $table->foreign('type_id')->references('id')->on('types')->constrained()->noActionOnUpdate();
-            // nullOnDelete
+            //nelle prove ho lasciato il noActionUpdate da modificare con il nullOnDelete();
+            $table->foreign('type_id')->references('id')->on('types')->constrained()->nullOnDelete();
         });
     }
 
@@ -29,4 +29,5 @@ return new class extends Migration
         });
     }
 };
+
 

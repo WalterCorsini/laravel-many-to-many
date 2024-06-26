@@ -64,17 +64,6 @@
         </select>
         {{-- /type --}}
 
-        {{-- technologies --}}
-        {{-- <p>Tecnologie:</p>
-        <div class="d-flex gap-3">
-            @foreach ($technologyList as $key => $curTechnology)
-                <label for="{{ $curTechnology->name }}">{{ $curTechnology->name }}</label>
-                <input type="checkbox" name="{{ $curTechnology->name }}" name="{{ $curTechnology->name }}"
-                    value="{{ $curTechnology->id }}">
-            @endforeach
-        </div> --}}
-        {{-- technologies --}}
-
         {{-- file --}}
         <label for="cover_image"> Immagine</label>
         <input
@@ -101,9 +90,6 @@
             <label for="removeImage">Rimuovi immagine :</label>
             <input type="checkbox" id="removeImage" name="removeImage">
         @endif
-        {{-- <div id="check" data-cover-image="{{$project->cover_image}}" class="{{ ($project->cover_image !== NULL)? 'hide' : ''}}}">
-        </div> --}}
-        {{-- /check remove image --}}
 
         {{-- old and new img --}}
         <div class="w-100 mt-2">
@@ -122,13 +108,4 @@
 
 
     </form>
-    {{-- /form --}}
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Controlla se cover_image è null o vuoto
-            if ({{ $project->cover_image === null || $project->cover_image === '' }}) {
-                document.getElementById('check').classList.add('hide');
-            }
-        });
-        </script> --}}
 @endsection

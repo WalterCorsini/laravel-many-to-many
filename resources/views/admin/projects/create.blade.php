@@ -62,6 +62,17 @@
     </select>
     {{-- /type --}}
 
+    {{-- technologies --}}
+    <p>Tecnologie:</p>
+    <div class="d-flex gap-3">
+        @foreach ($technologyList as $key => $curTechnology)
+            <label for="technology-{{$curTechnology->id}}">{{ $curTechnology->name }}</label>
+            <input type="checkbox" id="technology-{{$curTechnology->id}}" name="technologies[]"
+                value="{{ $curTechnology->id }}">
+        @endforeach
+    </div>
+    {{-- technologies --}}
+
     {{-- file --}}
     <label for="cover_image"> Immagine</label>
     <input class="form-control

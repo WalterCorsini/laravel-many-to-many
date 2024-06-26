@@ -20,8 +20,10 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-        $value = $request->numberPage ? $request->numberPage : 10;
-        $projectsList = Project::paginate($value)->appends(['numberPage' => $value]);
+        $value = $request->numberPage? $request->numberPage : 10;
+        $projectsList = Project::withCount('technologies')
+                                 ->paginate($value)
+                                 ->appends(['numberPage' => $value]);
         return view('admin.projects.index', compact('projectsList'));
     }
 
@@ -31,7 +33,8 @@ class ProjectController extends Controller
     public function create()
     {
         $typeList = Type::All();
-        return view('admin.projects.create', compact('typeList'));
+        $technologyList = Technology::All();
+        return view('admin.projects.create', compact('typeList','technologyList'));
     }
 
     /**
@@ -47,6 +50,11 @@ class ProjectController extends Controller
         }
         $newItem->slug = Str::slug($newItem->title);
         $newItem->save();
+
+        if($request->has('technologies')){
+            // dd($request->all());
+            $newItem->technologies()->attach($request->technologies);
+        }
         return redirect()->route("admin.projects.index");
     }
 
@@ -64,8 +72,7 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $typeList = Type::All();
-        $technologyList = Technology::All();
-        return view('admin.projects.edit', compact('project','typeList','technologyList'));
+        return view('admin.projects.edit', compact('project','typeList'));
     }
 
     /**
@@ -75,8 +82,6 @@ class ProjectController extends Controller
     {
 
         $data = $request->validated();
-        // $data = $request->all();
-        // dd(isset($data['alpha']));
         if (isset($data['cover_image'])) {
             if ($project->cover_image) {
                 Storage::delete($project->cover_image);

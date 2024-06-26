@@ -83,8 +83,8 @@
                             {{-- /type --}}
 
                             {{-- technologies --}}
-                            <td>
-                                    {{count($curElem->technologies)}}
+                            <td>{{-- eager loading --}}
+                                {{ $curElem->technologies_count }}
                             </td>
                             {{-- /technologies --}}
 

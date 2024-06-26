@@ -67,13 +67,4 @@ btnDeleteElem.addEventListener('click', function(e){
     inputElem.value = "";
 });
 
-// runs after the page loads
-// document.addEventListener('DOMContentLoaded', function() {
-//     const checkElement = document.getElementById('check');
-//     const coverImageValue = checkElement.getAttribute('data-cover-image');
-
-//     if (coverImageValue === null || coverImageValue === '') {
-//         checkElement.classList.add('hide');
-//     }
-// });
 

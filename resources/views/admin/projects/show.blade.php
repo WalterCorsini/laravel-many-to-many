@@ -63,6 +63,7 @@
                      </ul>
                 </li>
             @endforeach
+            {{$curCar->brand}}
         </ol>
         @else
         <span>nessuna tecnologia</span>
