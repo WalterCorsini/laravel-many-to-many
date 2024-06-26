@@ -68,10 +68,20 @@
         {{-- technologies --}}
         <p>Tecnologie:</p>
         <div class="d-flex gap-3">
-            @foreach ($technologyList as $curTechnology)
+            {{-- @foreach ($technologyList as $curTechnology)
                 <label for="technology-{{ $curTechnology->id }}">{{ $curTechnology->name }}</label>
                 <input type="checkbox" id="technology-{{ $curTechnology->id }}" name="technologies[]"
                     value="{{ $curTechnology->id }}">
+            @endforeach --}}
+            @foreach ($technologyList as $curTechnology)
+                @if (old('technologies') !== null)
+                    <input type="checkbox" class="btn-check" id="tech-{{ $curTechnology->id }}" name="technologies[]"
+                        value="{{ $curTechnology->id }}" @checked(in_array($curTechnology->id, old('technologies')))>
+                @else
+                    <input type="checkbox" id="tech-{{ $curTechnology->id }}" name="technologies[]"
+                        value="{{ $curTechnology->id }}" @checked($project->technologies->contains($curTechnology))>
+                @endif
+                <label for="tech-{{ $curTechnology->id }}">{{ $curTechnology->name }}</label>
             @endforeach
         </div>
         {{-- technologies --}}

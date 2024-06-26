@@ -66,7 +66,7 @@
     <div class="d-flex gap-3">
         @foreach ($technologyList as $curTechnology)
             <label for="technology-{{$curTechnology->id}}">{{ $curTechnology->name }}</label>
-            <input type="checkbox" id="technology-{{$curTechnology->id}}" name="technologies[]"
+            <input @checked(in_array($curTechnology->id,old('technologies',[]))) type="checkbox" id="technology-{{$curTechnology->id}}" name="technologies[]"
                 value="{{ $curTechnology->id }}">
         @endforeach
     </div>
