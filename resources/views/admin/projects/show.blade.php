@@ -72,26 +72,23 @@
                                         tecnologia in comune anche con questi progetti {{ count($technology->projects) }} :
                                     </strong>
                                     {{-- /show count common project have the same technology --}}
-
-                                    <ul>
-
-                                        <li>
-
-                                            {{-- show common project without project->id  --}}
-                                            @foreach ($technology->projects as $commonProject)
-                                                @if ($commonProject->id != $project->id)
-                                                    <span>{{ $commonProject->title }} ,</span>
-                                                @endif
-                                            @endforeach
-                                            {{-- /show common project without project->id  --}}
-
-                                        </li>
-                                    </ul>
                                 </li>
+
+                                <ul>
+                                    <li>
+
+                                        {{-- show common project without project->id  --}}
+                                        @foreach ($technology->projects as $commonProject)
+                                            @if ($commonProject->id != $project->id)
+                                                <span>{{ $commonProject->title }} ,</span>
+                                            @endif
+                                        @endforeach
+                                        {{-- /show common project without project->id  --}}
+
+                                    </li>
+                                </ul>
                             @endif
                             {{-- /show common technology if exists --}}
-
-                        </ul>
                     </li>
                 @endforeach
             </ol>
